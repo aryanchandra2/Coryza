@@ -20,12 +20,10 @@ async def create_browser():
 
 
 async def main():
-    controller = Controller(output_model=Posts)
     agent1 = Agent(
-            task=f'You will first be on the apollo website. On the right side of the page, there are a list of people in the industry with their information. We are looking for {num_people or NUM_PEOPLE} people who we can reach out to for a job or internship, so read their titles and find the most relevant people which I could reach out to. Click the access email button which reveals their email address. Get their name, title, company, and email address.',
-            llm=ChatOpenAI(model="gpt-4o", api_key=os.getenv("OPENAI_API_KEY"), temperature=0.00),
-            browser=create_browser(),
-            controller=controller
+        task=f'Go to linkedin.com and search for manual labor jobs in Texas and apply to one of them',
+        browser=create_browser(),
+        llm=ChatOpenAI(model="gpt-4o", api_key=os.getenv("OPENAI_API_KEY"))
     )
     result = await agent1.run()
 
